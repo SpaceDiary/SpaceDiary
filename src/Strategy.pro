@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     Menu.cpp \
     dictionary.cpp \
     TeachDialog.cpp \
-    HelpDialog.cpp
+    HelpDialog.cpp \
+    NewGameWizard.cpp
 
 HEADERS  += widget.h \
     ButtonWidget.h \
@@ -57,7 +58,8 @@ HEADERS  += widget.h \
     Menu.h \
     dictionary.h \
     TeachDialog.h \
-    HelpDialog.h
+    HelpDialog.h \
+    NewGameWizard.h
 
 RESOURCES +=
 

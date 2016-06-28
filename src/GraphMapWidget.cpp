@@ -3,7 +3,7 @@
 GraphMapWidget::GraphMapWidget(MapWidget *mw) : QWidget()
 {
     this->mw=mw;
-    QDir::setCurrent(mw->getWidget()->getModel()->getMainDir().path()+"/Pictures");
+    QDir::setCurrent(mw->getWidget()->getModel()->getMainDir().path()+"/images");
     pal1.setBrush(this->backgroundRole(), QBrush(QPixmap("space.jpg")));
     QDir::setCurrent(mw->getWidget()->getModel()->getMainDir().path());
     this->setPalette(pal1);

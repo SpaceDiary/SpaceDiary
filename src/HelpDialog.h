@@ -12,8 +12,6 @@ public:
 private:
     QGridLayout* gLayout;
 
-
-
     QPushButton* cancel;
 
 signals:

@@ -9,7 +9,7 @@ Menu::Menu(QDir mainDir, QWidget*)
 {
     this->setWindowFlags(Qt::WindowMinimizeButtonHint);
     this->showFullScreen();
-    QDir::setCurrent(mainDir.path()+"/Pictures");
+    QDir::setCurrent(mainDir.path()+"/images");
     pal1.setBrush(this->backgroundRole(), QBrush(QPixmap("space.jpg")));
     QDir::setCurrent(mainDir.path());
     this->setPalette(pal1);
@@ -30,6 +30,8 @@ Menu::Menu(QDir mainDir, QWidget*)
     new0 = new QPushButton("New game");
     vLayout->addWidget(new0, 1);
     new0->setObjectName("new");
+    QObject::connect(this->findChild<QObject*>("new"), SIGNAL(clicked()), this, SLOT(slotNew()));
+
 
     load = new QPushButton("Load game");
     vLayout->addWidget(load, 1);
@@ -114,6 +116,12 @@ void Menu::slotHelp()
 {
     helpDialog = new HelpDialog();
     helpDialog->show();
+}
+
+void Menu::slotNew()
+{
+    NewGameWizard* newGameWizard = new NewGameWizard();
+    newGameWizard->show();
 }
 
 //Функция удаления папки

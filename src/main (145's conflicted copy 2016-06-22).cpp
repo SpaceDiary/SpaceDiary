@@ -4,13 +4,12 @@
 #include <QApplication>
 //#include <phonon>
 
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
     QDir mainDir;
-    mainDir.setPath("/home/tolik/Dropbox/University/6/Software Design/Strategy");
+    mainDir.setPath("/home/katol/Dropbox/University/6/Software Design/Strategy");
     QDir::setCurrent(mainDir.path());
 
     Menu* menu = new Menu(mainDir);
@@ -19,8 +18,8 @@ int main(int argc, char *argv[])
 //    Phonon::MediaObject media;
 //    Phonon::AudioOutput ao(Phonon::MusicCategory);
 //    Phonon::createPath(&media, &ao);
-//    media.setCurrentSource(Phonon::MediaSource("sounds/ttp.mp3"));
-//    media.play();
+//    media.setCurrentSource(Phonon::MediaSource("Music/ttp.mp3"));
+    //media.play();
 //    QObject::connect(&media, SIGNAL(finished()), &media, SLOT(play()));
 
     return a.exec();

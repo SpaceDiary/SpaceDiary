@@ -4,6 +4,7 @@
 #include "model.h"
 #include "widget.h"
 #include "HelpDialog.h"
+#include "NewGameWizard.h"
 
 #include <QtGui>
 
@@ -51,6 +52,7 @@ public slots:
         void slotIncDay();
         void slotIncPeriod();
         void slotHelp();
+        void slotNew();
 };
 
 #endif // MENU_H
