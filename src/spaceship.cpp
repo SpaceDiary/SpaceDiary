@@ -8,6 +8,7 @@ SpaceShip::SpaceShip()
 SpaceShip::SpaceShip(QString name, SpaceSector* spaceSector)
 {
     this->spaceSector=spaceSector;
+    this->planet=NULL;
     SpaceShip::name = name;
     QFile fSpaceShip(name+".txt");
     if (fSpaceShip.open(QIODevice::ReadOnly))
@@ -37,6 +38,7 @@ SpaceShip::SpaceShip(QString name, SpaceSector* spaceSector)
 SpaceShip::SpaceShip(QString name, Planet* planet)
 {
     this->planet=planet;
+    this->spaceSector=NULL;
     SpaceShip::name = name;
     QFile fSpaceShip(name+".txt");
     if (fSpaceShip.open(QIODevice::ReadOnly))

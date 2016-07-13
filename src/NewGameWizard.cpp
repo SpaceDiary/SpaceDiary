@@ -1,11 +1,12 @@
 #include "NewGameWizard.h"
 
-QWizardPage* NewGameWizard::createPlanetsPage()
+QWizardPage* NewGameWizard::createFirstPage()
 {
-    QWizardPage* planetsPage = new QWizardPage;
-    //planetsPage->setTitle("PlanetsPage");
+    pageNumber=1;
+    QWizardPage* firstPage = new QWizardPage;
+    firstPage->setTitle("Choose your units races");
     gLayout = new QGridLayout();
-    planetsPage->setLayout(gLayout);
+    firstPage->setLayout(gLayout);
 
     planetsNumber=1;
     //QLabel* planetsLabel =  new QLabel("Number of planets: ");
@@ -15,7 +16,7 @@ QWizardPage* NewGameWizard::createPlanetsPage()
     //planetsBox->setMaximum(1);
     //gLayout->addWidget(planetsBox, 0, 1, 1, 10);
     //QObject::connect(planetsBox, SIGNAL(valueChanged(int)), this, SLOT(changePoints(int)));
-    QLabel* unitsLeftLabel = new QLabel("Units left ");
+    QLabel* unitsLeftLabel = new QLabel("Points left ");
     gLayout->addWidget(unitsLeftLabel, 0, 3, 1, 10);
     maxPoints=20;
     busyPoints=0;
@@ -23,8 +24,6 @@ QWizardPage* NewGameWizard::createPlanetsPage()
     pointsLabel = new QLabel(QString::number(pointsLeft)+"/"+QString::number(maxPoints));
     gLayout->addWidget(pointsLabel, 0, 4, 1, 1);
 
-    QLabel* unitsLabel =  new QLabel("Choose your units races: ");
-    gLayout->addWidget(unitsLabel, 1, 0, 1, 1);
     QLabel* amazonsLabel =  new QLabel("Amazons: ");
     gLayout->addWidget(amazonsLabel, 1, 2, 1, 1);
     amazonsBox = new QSpinBox();
@@ -56,33 +55,161 @@ QWizardPage* NewGameWizard::createPlanetsPage()
     gLayout->addWidget(robotsBox, 2, 7, 1, 1);
     QObject::connect(robotsBox, SIGNAL(valueChanged(int)), this, SLOT(changePoints(int)));
 
-    return planetsPage;
+    return firstPage;
 }
 
-QWizardPage* NewGameWizard::createSkillsPage()
+QWizardPage* NewGameWizard::createSecondPage()
 {
-    QWizardPage* skillsPage = new QWizardPage;
-    //skillsPage->setTitle("SkillsPage");
+    pageNumber=2;
+    QWizardPage* secondPage = new QWizardPage;
+    secondPage->setTitle("Choose your units ages and names");
     gLayout = new QGridLayout();
-    skillsPage->setLayout(gLayout);
+    secondPage->setLayout(gLayout);
+
+    QStringList agesTypes;
+    agesTypes <<"Choose" << "Baby" << "Young" << "Adult" << "Hardened" <<"Veteran";
+    QLabel* ageLabel = new QLabel("Age");
+    gLayout->addWidget(ageLabel, 0, 0, 1, 1);   
+    QLabel* raceLabel = new QLabel("Race");
+    gLayout->addWidget(raceLabel, 0, 1, 1, 1);
+    QLabel* unitLabel = new QLabel("Unit");
+    gLayout->addWidget(unitLabel, 0, 2, 1, 1);
+    QLabel* nameLabel = new QLabel("Name");
+    gLayout->addWidget(nameLabel, 0, 3, 1, 1);
+
+    int sum=0;
+    for (int i=0; i<amazonsNumber; i++)
+    {
+        QComboBox* cb = new QComboBox();
+        gLayout->addWidget(cb, i+1+sum, 0, 1, 1);
+        cb->addItems(agesTypes);
+        QObject::connect(cb, SIGNAL(currentIndexChanged(int)), units.at(i+sum), SLOT(setAge(int)));
+
+        QLabel* raceLabel = new QLabel("amazon");
+        gLayout->addWidget(raceLabel, i+1+sum, 1, 1, 1);
+
+        QLabel* unitLabel = new QLabel("Unit");
+        gLayout->addWidget(unitLabel, i+1+sum, 2, 1, 1);
+
+        QTextEdit* name = new QTextEdit();
+        gLayout->addWidget(name, i+1+sum, 3, 1, 1);
+    }
+    sum+=amazonsNumber;
+    for (int i=0; i<witchesNumber; i++)
+    {
+        QComboBox* cb = new QComboBox();
+        gLayout->addWidget(cb, i+1+sum, 0, 1, 1);
+        cb->addItems(agesTypes);
+        QObject::connect(cb, SIGNAL(currentIndexChanged(int)), units.at(i+sum), SLOT(setAge(int)));
 
 
+        QLabel* raceLabel = new QLabel("witch");
+        gLayout->addWidget(raceLabel, i+1+sum, 1, 1, 1);
 
-    return skillsPage;
+        QLabel* unitLabel = new QLabel("Unit");
+        gLayout->addWidget(unitLabel, i+1+sum, 2, 1, 1);
+
+        QTextEdit* name = new QTextEdit();
+        gLayout->addWidget(name, i+1+sum, 3, 1, 1);
+    }
+    sum+=witchesNumber;
+    for (int i=0; i<ghostsNumber; i++)
+    {
+        QLabel* undyingLabel = new QLabel("Undying");
+        gLayout->addWidget(undyingLabel, i+1+sum, 0, 1, 1);
+
+        QLabel* raceLabel = new QLabel("ghost");
+        gLayout->addWidget(raceLabel, i+1+sum, 1, 1, 1);
+
+        QLabel* unitLabel = new QLabel("Unit");
+        gLayout->addWidget(unitLabel, i+1+sum, 2, 1, 1);
+
+        QTextEdit* name = new QTextEdit();
+        gLayout->addWidget(name, i+1+sum, 3, 1, 1);
+    }
+    sum+=ghostsNumber;
+    for (int i=0; i<clonesNumber; i++)
+    {
+        QComboBox* cb = new QComboBox();
+        gLayout->addWidget(cb, i+1+sum, 0, 1, 1);
+        cb->addItems(agesTypes);
+        QObject::connect(cb, SIGNAL(currentIndexChanged(int)), units.at(i+sum), SLOT(setAge(int)));
+
+
+        QLabel* raceLabel = new QLabel("clone");
+        gLayout->addWidget(raceLabel, i+1+sum, 1, 1, 1);
+
+        QLabel* unitLabel = new QLabel("Unit");
+        gLayout->addWidget(unitLabel, i+1+sum, 2, 1, 1);
+
+        QTextEdit* name = new QTextEdit();
+        gLayout->addWidget(name, i+1+sum, 3, 1, 1);
+    }
+    sum+=clonesNumber;
+    for (int i=0; i<monkeysNumber; i++)
+    {
+        QComboBox* cb = new QComboBox();
+        gLayout->addWidget(cb, i+1+sum, 0, 1, 1);
+        cb->addItems(agesTypes);
+        QObject::connect(cb, SIGNAL(currentIndexChanged(int)), units.at(i+sum), SLOT(setAge(int)));
+
+
+        QLabel* raceLabel = new QLabel("monkey");
+        gLayout->addWidget(raceLabel, i+1+sum, 1, 1, 1);
+
+        QLabel* unitLabel = new QLabel("Unit");
+        gLayout->addWidget(unitLabel, i+1+sum, 2, 1, 1);
+
+        QTextEdit* name = new QTextEdit();
+        gLayout->addWidget(name, i+1+sum, 3, 1, 1);
+    }
+    sum+=monkeysNumber;
+    for (int i=0; i<robotsNumber; i++)
+    {
+        QLabel* undyingLabel = new QLabel("Undying");
+        gLayout->addWidget(undyingLabel, i+1+sum, 0, 1, 1);
+
+        QLabel* raceLabel = new QLabel("robot");
+        gLayout->addWidget(raceLabel, i+1+sum, 1, 1, 1);
+
+        QLabel* unitLabel = new QLabel("Unit");
+        gLayout->addWidget(unitLabel, i+1+sum, 2, 1, 1);
+
+        QTextEdit* name = new QTextEdit();
+        gLayout->addWidget(name, i+1+sum, 3, 1, 1);
+    }
+    sum+=robotsNumber;
+
+    return secondPage;
 }
 
-int NewGameWizard::changePoints(int)
+QWizardPage* NewGameWizard::createThirdPage()
+{
+    pageNumber=3;
+    QWizardPage* thirdPage = new QWizardPage;
+    thirdPage->setTitle("Choose your units skills");
+    gLayout = new QGridLayout();
+    thirdPage->setLayout(gLayout);
+
+    return thirdPage;
+}
+
+void NewGameWizard::changePoints(int)
 {
     busyPoints=0;
     spins.clear();
-    QStringList agesTypes;
-    agesTypes << "Baby" << "Young" << "Adult" << "Hardened" <<"Veteran";
     spins.append(amazonsBox->value());
+    amazonsNumber=amazonsBox->value();
     spins.append(witchesBox->value());
+    witchesNumber=witchesBox->value();
     spins.append(ghostsBox->value());
+    ghostsNumber=ghostsBox->value();
     spins.append(clonesBox->value());
+    clonesNumber=ghostsBox->value();
     spins.append(monkeysBox->value());
+    monkeysNumber=monkeysBox->value();
     spins.append(robotsBox->value());
+    robotsNumber=robotsBox->value();
 
     for (int i=1; i<7; i++)
     {
@@ -95,7 +222,6 @@ int NewGameWizard::changePoints(int)
     pointsLeft=maxPoints-busyPoints;
     pointsLabel->setText(QString::number(pointsLeft)+"/"+QString::number(maxPoints));
 
-    return 0;
 }
 
 int NewGameWizard::max(QList<int> spins)
@@ -113,21 +239,86 @@ int NewGameWizard::max(QList<int> spins)
 
 bool NewGameWizard::validateCurrentPage()
 {
-    if (pointsLeft!=0)
+    if (pageNumber==1)
     {
-        this->back();
-        return false;
+        if (pointsLeft!=0)
+        {
+            this->back();
+            return false;
+        }
+
+        for (int i=0; i<amazonsNumber; i++)
+        {
+            Unit* unit = new Unit();
+            unit->setRace(1);
+            units.append(unit);
+        }
+        for (int i=0; i<witchesNumber; i++)
+        {
+            Unit* unit = new Unit();
+            unit->setRace(2);
+            units.append(unit);
+        }
+        for (int i=0; i<ghostsNumber; i++)
+        {
+            Unit* unit = new Unit();
+            unit->setRace(3);
+            units.append(unit);
+        }
+        for (int i=0; i<clonesNumber; i++)
+        {
+            Unit* unit = new Unit();
+            unit->setRace(4);
+            units.append(unit);
+        }
+        for (int i=0; i<monkeysNumber; i++)
+        {
+            Unit* unit = new Unit();
+            unit->setRace(5);
+            units.append(unit);
+        }
+        for (int i=0; i<robotsNumber; i++)
+        {
+            Unit* unit = new Unit();
+            unit->setRace(6);
+            units.append(unit);
+        }
+
+        this->removePage(1);
+        this->addPage(createSecondPage());
+        this->addPage(new QWizardPage);
+        return true;
+    }
+
+    if (pageNumber==2)
+    {
+        for (int i=0; i<units.length(); i++)
+        {
+            if (units.at(i)->getAge()==-1)
+            {
+                this->removePage(2);
+                pageNumber=1;
+                this->back();
+                return false;
+            }
+        }
+
+        this->removePage(2);
+        this->addPage(createThirdPage());
+        return true;
     }
 
     return true;
+
 }
 
 
 NewGameWizard::NewGameWizard(QWidget *parent)
     : QWizard(parent)
 {
+    pageNumber=0;
     this->setWindowTitle("New game settings");
-    this->addPage(createPlanetsPage());
-    this->addPage(createSkillsPage());
+    this->addPage(createFirstPage());
+    this->addPage(new QWizardPage);
 }
 

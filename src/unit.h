@@ -36,7 +36,6 @@ public:
     Planet* getPlanet() {return planet;}
     void setRace(int);
     void setName(QString);
-    void setAge(int);
     void setSpaceSector(SpaceSector*);
     void setSpaceShip(SpaceShip*);
     void setPlanet(Planet*);
@@ -57,65 +56,7 @@ private:
     Dictionary* dictionary;
 public slots:
     void slotSetAction();
-//private:
-
-//    bool armor;
-//    bool blaster;
-//    bool lifeSystem;
-//    bool megabomb;
-
-//    bool health;
-//    bool agility;
-//    bool strength;
-//    bool immunity;
-
-//    int accuracy;
-
-//    int telepathy;
-//    int lightning;
-
-//    bool stealYouth;
-//    bool impersonation;
-//    bool reEducation;
-//    bool teleport;
-
-//    bool uterineReplicator;
-//    bool magicStaff;
-//    bool altar;
-//    bool planet;
-
-//    int drainLife;
-//    int flight;
-
-//    bool reincarnation;
-//    bool connection;
-//    bool necromancy;
-//    bool plague;
-
-//    bool vampirism;
-
-//    bool magicWand;
-//    bool sandom;
-//    bool weaponry;
-//    bool clone;
-
-//    bool ambush;
-//    bool camouflage;
-
-//    bool claws;
-
-//    int meleeAttack;
-//    int meleeDefense;
-
-//    bool lazer;
-//    bool spanner;
-//    bool sheathing;
-//    bool robot;
-
-//    bool carcass;
-
-//    bool spaceShip;
-//    bool antiaircrafGun;
+    void setAge(int);
 
 };
 

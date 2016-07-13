@@ -6,6 +6,7 @@ Unit::Unit() : QObject()
     spaceSector=NULL;
     spaceShip=NULL;
     action="";
+    age=-1;
 
     for (int i=0; i<4; i++)
         first.append(0);
